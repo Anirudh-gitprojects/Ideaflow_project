@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+
+        .spanText {
+            color: rgb(47, 68, 255);
+            background-color: rgba(116, 183, 238, 0.5);
+        }
+        .toDelete
+        {
+            color: rgb(255, 255, 255);
+            background-color: rgba(253, 2, 2, 0.5);
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Fancy Editore</title>
+    <script>
+        function moveCaret(charCount) {
+            var sel, range;
+            if (window.getSelection) {
+                // IE9+ and other browsers
+                sel = window.getSelection();
+                if (sel.rangeCount > 0) {
+                    var textNode = sel.focusNode;
+                    var newOffset = sel.focusOffset + charCount;
+                    sel.collapse(textNode, Math.min(textNode.length, newOffset));
+                }
+            } else if ((sel = window.document.selection)) {
+                // IE <= 8
+                if (sel.type != "Control") {
+                    range = sel.createRange();
+                    range.move("character", charCount);
+                    range.select();
+                }
+            }
+        }
+        var firstBackspacePressed = false;
+        var totalBoxes = 0;
+        function getCharacterPrecedingCaret(containerEl) {
+            var precedingChar = "", sel, range, precedingRange;
+            if (window.getSelection) {
+                sel = window.getSelection();
+                sel.anchorOffset = sel.anchorOffset - 2;
+                if (sel.rangeCount > 0) {
+                    range = sel.getRangeAt(0).cloneRange();
+                    range.collapse(true);
+                    range.setStart(containerEl, 0);
+                    precedingChar = range.toString().slice(-2);
+                }
+            } else if ((sel = document.selection) && sel.type != "Control") {
+                range = sel.createRange();
+                sel.anchorOffset = sel.anchorOffset - 2;
+                precedingRange = range.duplicate();
+                precedingRange.moveToElementText(containerEl);
+                precedingRange.setEndPoint("EndToStart", range);
+                precedingChar = precedingRange.text.slice(-2);
+            }
+            return precedingChar;
+        }
+        function addText() {
+            let element = document.createElement('span')
+            element.contentEditable = false;
+            element.innerText = "added text";
+            element.style = "border: 1px solid black; color:red"
+            pasteHtmlAtCaret(element.outerHTML.toString(), true);
+        }
+        function pasteHtmlAtCaret(html, selectPastedContent) {
+            var sel, range;
+            if (window.getSelection) {
+                // IE9 and non-IE
+                sel = window.getSelection();
+                if (sel.getRangeAt && sel.rangeCount) {
+                    range = sel.getRangeAt(0);
+                    range.deleteContents();
+                    // Range.createContextualFragment() would be useful here but is
+                    // only relatively recently standardized and is not supported in
+                    // some browsers (IE9, for one)
+                    var el = document.createElement("div");
+                    el.innerHTML = html;
+                    var frag = document.createDocumentFragment(), node, lastNode;
+                    while ((node = el.firstChild)) {
+                        lastNode = frag.appendChild(node);
+                    }
+                    var firstNode = frag.firstChild;
+                    range.insertNode(frag);
+
+                    // Preserve the selection
+                    if (lastNode) {
+                        range = range.cloneRange();
+                        range.setStartAfter(lastNode);
+                        if (selectPastedContent) {
+                            range.setStartBefore(firstNode);
+                        } else {
+                            range.collapse(true);
+                        }
+                        sel.removeAllRanges();
+                        sel.addRange(range);
+                    }
+                }
+            } else if ((sel = document.selection) && sel.type != "Control") {
+                // IE < 9
+                var originalRange = sel.createRange();
+                originalRange.collapse(true);
+                sel.createRange().pasteHTML(html);
+                if (selectPastedContent) {
+                    range = sel.createRange();
+                    range.setEndPoint("StartToStart", originalRange);
+                    range.select();
+                }
+            }
+        }
+        function checkTrigger() {
+            //data insertion
+            if (event.key === ">") {
+                let lastCharacters = getCharacterPrecedingCaret(this)
+                if (lastCharacters.toString() === "<>") {
+                    let mainBox = this.parentNode
+                    childNodes = this.parentNode.children
+                    console.log(childNodes.length);
+                    if (childNodes.length > 1) {
+                        let selector = document.createElement('select')
+                        selector.addEventListener('change', selection)
+                        selector.appendChild(document.createElement('option'))
+                        for (let i = 0; i < childNodes.length && i != this.id; i++) {
+                            if (childNodes[i].innerText !== "") {
+                                let option = document.createElement('option')
+                                option.innerText = childNodes[i].innerText;
+                                option.value = childNodes[i].innerText; // possibly might need to turn this into innerHtml
+                                selector.appendChild(option)
+                            }
+                        }
+                        this.appendChild(selector);
+                    }
+                }
+            }
+        }
+    
+        function createAdditionalDiv() {
+            let innerBox = document.createElement('div')
+            innerBox.contentEditable = "true"
+            innerBox.id = totalBoxes++;
+            innerBox.className = "mainBox edit"
+            let mainBox = document.getElementById('mainContainer')
+            innerBox.addEventListener('keyup', checkTrigger)
+            mainBox.appendChild(innerBox);
+            $(".mainBox").on("keydown", function (event) {
+                if (event.key === 'Backspace' || event.key === 'Delete') {
+                    let deletionMarker = document.createElement('span');
+                    deletionMarker.hidden = true
+                    deletionMarker.id = "deletionMarker"
+                    pasteHtmlAtCaret(deletionMarker.outerHTML.toString(), false);
+                    let previousTag =document.querySelector('#deletionMarker').previousSibling
+                    console.log(previousTag)
+                    if (previousTag.tagName === "SPAN") {
+                        if(previousTag.className==="toDelete")
+                        {
+                            event.preventDefault();
+                            document.getElementById('deletionMarker').remove();
+                            document.querySelector('.toDelete').remove()
+                        }
+                        else
+                        {
+                            event.preventDefault();
+                            document.getElementById('deletionMarker').remove();
+                            previousTag.className = 'toDelete';
+                        }
+                    }
+                    else
+                    {
+                        document.getElementById('deletionMarker').remove();
+                    }
+                }
+            });
+        }
+        function selection() {
+            let value = event.target.value;
+            let newSpan = document.createElement('span')
+            newSpan.className = 'spanText'
+            newSpan.contentEditable = false
+            newSpan.innerText = '<>'+event.target.value
+            pasteHtmlAtCaret(newSpan.outerHTML.toString(), false)
+            let nodes = event.target.parentNode.childNodes
+            for(let i = 0;i<nodes.length;i++)
+            {
+                if(nodes[i].nodeName==="#text")
+                {
+                    nodes[i].textContent = nodes[i].textContent.replace("<>","")
+                }
+            }
+            event.target.remove();
+        }
+
+    </script>
+</head>
+
+<body>
+    <button onclick="createAdditionalDiv()" id="addButton" class='glowing-btn'><span class='glowing-txt'>A<span class='faulty-letter'>D</span>D</span></button>
+
+    <div class="container">
+    <div id="mainContainer" class="textarea-container ">
+    </div></div>
+    <!-- <div class="mainBox" onkeyup="checkTrigger(this)" id="mainContainer" contenteditable="true">
+    </div> -->
+    <!-- <button onclick="addText()">Paste stuff!</button> -->
+</body>
+
+</html>
