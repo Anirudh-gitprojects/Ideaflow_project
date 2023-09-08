@@ -2,8 +2,12 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
     <style>
+        .mainBox {
+            border: 1px solid black;
+            height: 60px;
+            margin: 20px;
+        }
 
         .spanText {
             color: rgb(47, 68, 255);
@@ -17,8 +21,8 @@
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="./jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>Fancy Editore</title>
     <script>
         function moveCaret(charCount) {
@@ -145,7 +149,7 @@
             let innerBox = document.createElement('div')
             innerBox.contentEditable = "true"
             innerBox.id = totalBoxes++;
-            innerBox.className = "mainBox edit"
+            innerBox.className = "mainBox"
             let mainBox = document.getElementById('mainContainer')
             innerBox.addEventListener('keyup', checkTrigger)
             mainBox.appendChild(innerBox);
@@ -156,7 +160,10 @@
                     deletionMarker.id = "deletionMarker"
                     pasteHtmlAtCaret(deletionMarker.outerHTML.toString(), false);
                     let previousTag =document.querySelector('#deletionMarker').previousSibling
-                    console.log(previousTag)
+                    while(!previousTag.textContent)
+                    {
+                        previousTag = previousTag.previousSibling
+                    }
                     if (previousTag.tagName === "SPAN") {
                         if(previousTag.className==="toDelete")
                         {
@@ -200,11 +207,9 @@
 </head>
 
 <body>
-    <button onclick="createAdditionalDiv()" id="addButton" class='glowing-btn'><span class='glowing-txt'>A<span class='faulty-letter'>D</span>D</span></button>
-
-    <div class="container">
-    <div id="mainContainer" class="textarea-container ">
-    </div></div>
+    <button onclick="createAdditionalDiv()">Add Richbox</button>
+    <div id="mainContainer">
+    </div>
     <!-- <div class="mainBox" onkeyup="checkTrigger(this)" id="mainContainer" contenteditable="true">
     </div> -->
     <!-- <button onclick="addText()">Paste stuff!</button> -->
