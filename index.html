@@ -3,22 +3,14 @@
 
 <head>
     <style>
-        .mainBox {
-            border: 1px solid black;
-            height: 60px;
-            margin: 20px;
-        }
 
-        .spanText {
-            color: rgb(47, 68, 255);
-            background-color: rgba(116, 183, 238, 0.5);
-        }
 
         .toDelete {
             color: rgb(255, 255, 255);
-            background-color: rgba(253, 2, 2, 0.5);
+            background-color: rgba(223, 21, 21, 0.5);
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="styles.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="./jquery.min.js"></script> -->
@@ -120,6 +112,7 @@
                     childNodes = this.parentNode.children
                     if (childNodes.length > 1) {
                         let selector = document.createElement('select')
+                  
                         selector.addEventListener('change', selection)
                         selector.appendChild(document.createElement('option'))
                         for (let i = 0; i < childNodes.length && i != this.id; i++) {
@@ -175,7 +168,7 @@
         function selection() {
             let value = event.target.value;
             let newSpan = document.createElement('span')
-            newSpan.className = 'spanText'
+            newSpan.className = 'spanText' 
             newSpan.contentEditable = false
             newSpan.innerText = '<>' + event.target.value
             putDataToCarentPos(newSpan.outerHTML.toString(), false, event.target.parentNode)
@@ -194,7 +187,9 @@
 </head>
 
 <body>
-    <button onclick="createAdditionalDiv()">Add Richbox</button>
+    <div id='addbtn' >
+        <div  class="search-input-holder"><input type="text" class="inputsearch" placeholder="Search Notes">
+    <button onclick="createAdditionalDiv()" id='btn1' class="bg-blue w-10 h-10 grid place-content-center rounded  "><svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true" class="text-2xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"></path></svg></button> </div></div>
     <div id="mainContainer">
     </div>
     <!-- <div class="mainBox" onkeyup="checkTrigger(this)" id="mainContainer" contenteditable="true">
