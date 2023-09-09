@@ -1,78 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Pacifico&family=Roboto&display=swap');
-html{
-    background-color: #212529;
+@import url("https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Pacifico&family=Roboto&display=swap");
+html {
+  background-color: #212529;
 }
 
-
-#btn1{
-    background-color: #35dff1;
-    height: 50px;
-    width: 50px;
-    border-radius: 10%;
-
+#btn1 {
+  background-color: #35dff1;
+  height: 50px;
+  width: 50px;
+  border-radius: 10%;
 }
 
-select{
-    width: 100px;
-    background-color: #35dff1;
-    font-size: 20px;
-        font-family: 'Happy Monkey', cursive;
-font-family: 'Pacifico', cursive;
-font-family: 'Roboto', sans-serif;
-position: relative;
-bottom:30px;
-
+select {
+  width: auto;
+  background-color: rgba(53, 223, 241,0.5);
+  font-size: 20px;
+  font-weight: italics;
+  border-radius: 25px;
+  font-family: "Happy Monkey", cursive;
+  font-family: "Pacifico", cursive;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  bottom: 30px;
 }
-#mainContainer{
-
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: center;
-        justify-content: flex-end;
-        padding: 30px;
-}
-
-.inputsearch{
-width: 800px;
-height: 40px;
-background-color: #343a40;
-color: #cecece;;
+#mainContainer {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 30px;
 }
 
-.mainBox{
-    width:500px;
-    background-color: #212529;
-    width:800px;
-    opacity:4;
-    font-size: 20px;
-    color:white;
-    font-family: 'Happy Monkey', cursive;
-font-family: 'Pacifico', cursive;
-font-family: 'Roboto', sans-serif;
-    padding: 40px;
-    border-top: none;
-    border-right:none;
-    border-left:none;
-    border-bottom: 1px solid white;
-
+.inputsearch {
+  width: 800px;
+  height: 40px;
+  background-color: #343a40;
+  color: #cecece;
 }
 
-#addbtn{
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    align-items: center;
-    border-bottom: 1px solid white;
-    padding-bottom: 30px;
+.mainBox {
+  width: 500px;
+  background-color: #212529;
+  width: 800px;
+  opacity: 4;
+  font-size: 20px;
+  color: white;
+  font-family: "Happy Monkey", cursive;
+  font-family: "Pacifico", cursive;
+  font-family: "Roboto", sans-serif;
+  padding: 40px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid white;
 }
 
+#addbtn {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  align-items: center;
+  border-bottom: 1px solid white;
+  padding-bottom: 30px;
+}
+.spanText:hover {
+  opacity: 0.4;
+  cursor: pointer;
+}
 .spanText {
-    color: cyan;
-    font-family: 'Happy Monkey', cursive;
-    font-family: 'Pacifico', cursive;
-    font-family: 'Roboto', sans-serif;
- 
+  color: aqua;
+  background-color: rgba(177, 224, 231,0.5);
+  font-family: "Happy Monkey", cursive;
+  font-family: "Pacifico", cursive;
+  font-family: "Roboto", sans-serif;
+  border-radius: 25px;
 }
 
+.toDelete {
+  color: rgb(255, 255, 255);
+  background-color: rgba(253, 2, 2, 0.5);
+  border-radius: 25px;
+  padding: 5px;
+}
 
+.toDelete:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgba(253, 2, 2, 0.25);
+  border-radius: 25px;
+  padding: 5px;
+  cursor: pointer;
+}
 /* Custom dropdown */
