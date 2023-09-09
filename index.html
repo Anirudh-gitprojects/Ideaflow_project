@@ -105,7 +105,7 @@
                 }
             }
         }
-        function checkTrigger() {
+       function checkTrigger() {
             if (event.key === ">") {
                 let lastCharacters = getCharsBeforeCaret(this)
                 if (lastCharacters.toString() === "<>") {
@@ -114,12 +114,20 @@
                     if (childNodes.length > 1) {
                         let selector = document.createElement('select')
                         selector.addEventListener('change', selection)
-                        selector.appendChild(document.createElement('option'))
-                        for (let i = 0; i < childNodes.length && i != this.id; i++) {
+                        let topElement = document.createElement('option')
+                        topElement.value = ""
+                        topElement.disabled = true
+                        topElement.selected = true
+                        topElement.innerText = "Select suggestion"
+                        selector.appendChild(topElement)
+                        for (let i = 0; i < childNodes.length; i++) {
+                            if (i == this.id) {
+                                continue;
+                            }
                             if (childNodes[i].innerText !== "") {
                                 let option = document.createElement('option')
                                 option.innerText = childNodes[i].innerText;
-                                option.value = childNodes[i].innerText; 
+                                option.value = childNodes[i].innerText;
                                 selector.appendChild(option)
                             }
                         }
@@ -128,6 +136,7 @@
                 }
             }
         }
+
 
         function createAdditionalDiv() {
             let innerBox = document.createElement('div')
