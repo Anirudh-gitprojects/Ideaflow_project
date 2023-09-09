@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Pacifico&family=Roboto&display=swap');
+html{
+    background-color: #212529;
+}
+
+
+#btn1{
+    background-color: #35dff1;
+    height: 50px;
+    width: 50px;
+    border-radius: 10%;
+
+}
+
+select{
+    width: 100px;
+    background-color: #35dff1;
+    font-size: 20px;
+        font-family: 'Happy Monkey', cursive;
+font-family: 'Pacifico', cursive;
+font-family: 'Roboto', sans-serif;
+position: relative;
+bottom:30px;
+
+}
+#mainContainer{
+
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 30px;
+}
+
+.inputsearch{
+width: 800px;
+height: 40px;
+background-color: #343a40;
+color: #cecece;;
+}
+
+.mainBox{
+    width:500px;
+    background-color: #212529;
+    width:800px;
+    opacity:4;
+    font-size: 20px;
+    color:white;
+    font-family: 'Happy Monkey', cursive;
+font-family: 'Pacifico', cursive;
+font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    border-top: none;
+    border-right:none;
+    border-left:none;
+    border-bottom: 1px solid white;
+
+}
+
+#addbtn{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    align-items: center;
+    border-bottom: 1px solid white;
+    padding-bottom: 30px;
+}
+
+.spanText {
+    color: cyan;
+    font-family: 'Happy Monkey', cursive;
+    font-family: 'Pacifico', cursive;
+    font-family: 'Roboto', sans-serif;
+ 
+}
+
+
+/* Custom dropdown */
