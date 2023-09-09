@@ -2,16 +2,15 @@
 <html lang="en">
 
 <head>
-        <link rel="stylesheet" type="text/css" href="styles.css"> 
-
     <style>
-    
+
 
         .toDelete {
             color: rgb(255, 255, 255);
             background-color: rgba(223, 21, 21, 0.5);
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="styles.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="./jquery.min.js"></script> -->
@@ -105,7 +104,7 @@
                 }
             }
         }
-       function checkTrigger() {
+        function checkTrigger() {
             if (event.key === ">") {
                 let lastCharacters = getCharsBeforeCaret(this)
                 if (lastCharacters.toString() === "<>") {
@@ -137,7 +136,6 @@
             }
         }
 
-
         function createAdditionalDiv() {
             let innerBox = document.createElement('div')
             innerBox.contentEditable = "true"
@@ -166,7 +164,6 @@
                             event.preventDefault();
                             document.getElementById('deletionMarker').remove();
                             previousTag.className = 'toDelete';
-                            event.stopImmediatePropagation();
                         }
                     }
                     else {
@@ -178,7 +175,7 @@
         function selection() {
             let value = event.target.value;
             let newSpan = document.createElement('span')
-            newSpan.className = 'spanText'
+            newSpan.className = 'spanText' 
             newSpan.contentEditable = false
             newSpan.innerText = '<>' + event.target.value
             putDataToCarentPos(newSpan.outerHTML.toString(), false, event.target.parentNode)
