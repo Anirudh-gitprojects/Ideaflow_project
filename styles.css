@@ -10,18 +10,7 @@ html {
   border-radius: 10%;
 }
 
-select {
-  width: auto;
-  background-color: rgba(53, 223, 241,0.8);
-  font-size: 20px;
-  font-weight: italics;
-  border-radius: 25px;
-  font-family: "Happy Monkey", cursive;
-  font-family: "Pacifico", cursive;
-  font-family: "Roboto", sans-serif;
-  position: relative;
-  bottom: 30px;
-}
+
 #mainContainer {
   display: flex;
   flex-direction: column-reverse;
