@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Pacifico&family=Roboto&display=swap");
+
 html {
   background-color: #212529;
 }
@@ -11,8 +12,8 @@ html {
 }
 
 select {
-  width: auto;
-  background-color: rgba(53, 223, 241,0.8);
+  width: 100%; /* Make the select element full-width on mobile */
+  background-color: rgba(53, 223, 241, 0.8);
   font-size: 20px;
   font-weight: italics;
   border-radius: 25px;
@@ -21,7 +22,9 @@ select {
   font-family: "Roboto", sans-serif;
   position: relative;
   bottom: 30px;
+  margin-bottom: 10px; /* Add some margin at the bottom on mobile */
 }
+
 #mainContainer {
   display: flex;
   flex-direction: column-reverse;
@@ -31,17 +34,15 @@ select {
 }
 
 .inputsearch {
-  width: 800px;
+  width: 100%; /* Make the search input full-width on mobile */
   height: 40px;
   background-color: #343a40;
   color: #cecece;
 }
 
 .mainBox {
-  width: 500px;
   background-color: #212529;
-  width: 800px;
-  opacity: 4;
+  width: 100%; /* Make the mainBox full-width on mobile */
   font-size: 20px;
   color: white;
   font-family: "Happy Monkey", cursive;
@@ -52,6 +53,7 @@ select {
   border-right: none;
   border-left: none;
   border-bottom: 1px solid white;
+  margin-bottom: 20px; /* Add some margin at the bottom on mobile */
 }
 
 #addbtn {
@@ -62,31 +64,40 @@ select {
   border-bottom: 1px solid white;
   padding-bottom: 30px;
 }
+
 .spanText:hover {
   opacity: 0.4;
   cursor: pointer;
 }
+
 .spanText {
   color: aqua;
-  background-color: rgba(177, 224, 231,0.5);
+  background-color: rgba(177, 224, 231, 0.5);
   font-family: "Happy Monkey", cursive;
   font-family: "Pacifico", cursive;
   font-family: "Roboto", sans-serif;
   border-radius: 25px;
+  padding: 5px 10px; /* Adjust padding for better touch interaction */
 }
 
 .toDelete {
   color: rgb(255, 255, 255);
   background-color: rgba(253, 2, 2, 0.5);
   border-radius: 25px;
-  padding: 5px;
+  padding: 5px 10px; /* Adjust padding for better touch interaction */
 }
 
 .toDelete:hover {
   color: rgb(255, 255, 255);
   background-color: rgba(253, 2, 2, 0.25);
   border-radius: 25px;
-  padding: 5px;
+  padding: 5px 10px; /* Adjust padding for better touch interaction */
   cursor: pointer;
 }
-/* Custom dropdown */
+
+/* Media query for smaller screens (e.g., mobile phones) */
+@media (max-width: 768px) {
+  .mainBox {
+    font-size: 16px; /* Reduce font size on smaller screens */
+  }
+}
