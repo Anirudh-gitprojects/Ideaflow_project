@@ -151,7 +151,7 @@
             innerBox.addEventListener('keyup', checkTrigger)
 
             mainBox.appendChild(innerBox);
-            $(".mainBox").on("keydown", function (event) {
+            document.getElementById(2).addEventListener("input", function (event) {
                 if (event.key === 'Backspace' || event.key === 'Delete') {
                     let deletionMarker = document.createElement('span');
                     deletionMarker.hidden = true
