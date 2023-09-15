@@ -151,34 +151,7 @@
             innerBox.addEventListener('keyup', checkTrigger)
 
             mainBox.appendChild(innerBox);
-            document.getElementById(2).addEventListener("input", function (event) {
-                if (event.key === 'Backspace' || event.key === 'Delete') {
-                    let deletionMarker = document.createElement('span');
-                    deletionMarker.hidden = true
-                    deletionMarker.id = "deletionMarker"
-                    putDataToCarentPos(deletionMarker.outerHTML.toString(), false);
-                    let previousTag = document.querySelector('#deletionMarker').previousSibling
-                    while (!previousTag.textContent) {
-                        previousTag = previousTag.previousSibling
-                    }
-                    if (previousTag.tagName === "SPAN") {
-                        if (previousTag.className === "toDelete") {
-                            event.preventDefault();
-                            document.getElementById('deletionMarker').remove();
-                            document.querySelector('.toDelete').remove()
-                        }
-                        else {
-                            event.preventDefault();
-                            document.getElementById('deletionMarker').remove();
-                            previousTag.className = 'toDelete';
-                            event.stopImmediatePropagation();
-                        }
-                    }
-                    else {
-                        document.getElementById('deletionMarker').remove();
-                    }
-                }
-            });
+           
         }
         function selection() {
             let value = event.target.value;
