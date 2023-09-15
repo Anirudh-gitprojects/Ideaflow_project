@@ -112,7 +112,7 @@
 
         function checkTrigger() {
             // Handle the Backspace and Delete keys
-            if (event.key === 'Backspace' || event.key === 'Delete' || event.touches) {
+            if (event.key === 'Backspace' || event.key === 'Delete') {
                 let lastCharacters = getCharsBeforeCaret(this);
                 console.log(lastCharacters);
                 if (lastCharacters.toString() === "<>") {
