@@ -8,14 +8,15 @@ html {
   background-color: #35dff1;
   height: 50px;
   width: 50px;
-  left: 222px;
-  top: -48px;
-  position:relative;
+ float: right;
+ position: relative;
+ left: 60px;
+ top:-46px;
   border-radius: 10%;
 }
 
 select {
-  width: 100%; /* Make the select element full-width on mobile */
+  width: auto; /* Make the select element full-width on mobile */
   background-color: rgba(53, 223, 241, 0.8);
   font-size: 20px;
   font-weight: italics;
@@ -45,7 +46,7 @@ select {
 
 .mainBox {
   background-color: #212529;
-  width: 100%; /* Make the mainBox full-width on mobile */
+  width: 800px; /* Make the mainBox full-width on mobile */
   font-size: 20px;
   color: white;
   font-family: "Happy Monkey", cursive;
@@ -98,9 +99,14 @@ select {
   cursor: pointer;
 }
 
+.search-input-holder{
+  width: 500px;
+}
 /* Media query for smaller screens (e.g., mobile phones) */
 @media (max-width: 768px) {
   .mainBox {
     font-size: 16px; /* Reduce font size on smaller screens */
   }
 }
+/* Custom dropdown */
+  
