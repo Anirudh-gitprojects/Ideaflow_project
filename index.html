@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+, <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,54 +18,13 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>Fancy Editor</title>
     <script>
-        function moveCaret(charCount) {
-            var sel, range;
-            if (window.getSelection) {
-                sel = window.getSelection();
-                if (sel.rangeCount > 0) {
-                    var textNode = sel.focusNode;
-                    var newOffset = sel.focusOffset + charCount;
-                    sel.collapse(textNode, Math.min(textNode.length, newOffset));
-                }
-            } else if ((sel = window.document.selection)) {
-                if (sel.type != "Control") {
-                    range = sel.createRange();
-                    range.move("character", charCount);
-                    range.select();
-                }
-            }
-        }
-
-        var firstBackspacePressed = false;
         var totalBoxes = 0;
 
-        function getCharsBeforeCaret(containerEl) {
-            var precedingChar = "", sel, range, precedingRange;
-            if (window.getSelection) {
-                sel = window.getSelection();
-                sel.anchorOffset = sel.anchorOffset - 2;
-                if (sel.rangeCount > 0) {
-                    range = sel.getRangeAt(0).cloneRange();
-                    range.collapse(true);
-                    range.setStart(containerEl, 0);
-                    precedingChar = range.toString().slice(-2);
-                }
-            } else if ((sel = document.selection) && sel.type != "Control") {
-                range = sel.createRange();
-                sel.anchorOffset = sel.anchorOffset - 2;
-                precedingRange = range.duplicate();
-                precedingRange.moveToElementText(containerEl);
-                precedingRange.setEndPoint("EndToStart", range);
-                precedingChar = precedingRange.text.slice(-2);
-            }
-            return precedingChar;
-        }
-
         function addText() {
-            let element = document.createElement('span')
+            let element = document.createElement('span');
             element.contentEditable = false;
             element.innerText = "added text";
-            element.style = "border: 1px solid black; color:red"
+            element.style = "border: 1px solid black; color:red";
             putDataToCarentPos(element.outerHTML.toString(), true);
         }
 
@@ -80,7 +39,8 @@
                     range.deleteContents();
                     var el = document.createElement("div");
                     el.innerHTML = html;
-                    var frag = document.createDocumentFragment(), node, lastNode;
+                    var frag = document.createDocumentFragment(),
+                        node, lastNode;
                     while ((node = el.firstChild)) {
                         lastNode = frag.appendChild(node);
                     }
@@ -111,35 +71,32 @@
         }
 
         function checkTrigger() {
-            // Handle the Backspace and Delete keys
-            if (event.key === 'Backspace' || event.key === 'Delete') {
-                let lastCharacters = getCharsBeforeCaret(this);
-                console.log(lastCharacters);
-                if (lastCharacters.toString() === "<>") {
-                    let mainBox = this.parentNode;
-                    childNodes = this.parentNode.children;
-                    if (childNodes.length > 1) {
-                        let selector = document.createElement('select');
-                        selector.addEventListener('change', selection);
-                        let topElement = document.createElement('option');
-                        topElement.value = "";
-                        topElement.disabled = true;
-                        topElement.selected = true;
-                        topElement.innerText = "Select suggestion";
-                        selector.appendChild(topElement);
-                        for (let i = 0; i < childNodes.length; i++) {
-                            if (i == this.id) {
-                                continue;
-                            }
-                            if (childNodes[i].innerText !== "") {
-                                let option = document.createElement('option');
-                                option.innerText = childNodes[i].innerText;
-                                option.value = childNodes[i].innerText;
-                                selector.appendChild(option);
-                            }
+            let lastCharacters = getCharsBeforeCaret(this);
+            console.log(lastCharacters);
+            if (lastCharacters.toString() === "<>") {
+                let mainBox = this.parentNode;
+                childNodes = this.parentNode.children;
+                if (childNodes.length > 1) {
+                    let selector = document.createElement('select');
+                    selector.addEventListener('change', selection);
+                    let topElement = document.createElement('option');
+                    topElement.value = "";
+                    topElement.disabled = true;
+                    topElement.selected = true;
+                    topElement.innerText = "Select suggestion";
+                    selector.appendChild(topElement);
+                    for (let i = 0; i < childNodes.length; i++) {
+                        if (i == this.id) {
+                            continue;
                         }
-                        this.appendChild(selector);
+                        if (childNodes[i].innerText !== "") {
+                            let option = document.createElement('option');
+                            option.innerText = childNodes[i].innerText;
+                            option.value = childNodes[i].innerText;
+                            selector.appendChild(option);
+                        }
                     }
+                    this.appendChild(selector);
                 }
             }
         }
@@ -150,8 +107,7 @@
             innerBox.id = totalBoxes++;
             innerBox.className = "mainBox";
             let mainBox = document.getElementById('mainContainer');
-            innerBox.addEventListener('keyup', checkTrigger);
-            innerBox.addEventListener('touchstart', checkTrigger);
+            innerBox.addEventListener('input', checkTrigger);
             mainBox.appendChild(innerBox);
         }
 
@@ -177,7 +133,13 @@
 <body>
     <div id='addbtn'>
         <div class="search-input-holder"><input type="text" class="inputsearch" placeholder="Search Notes">
-            <button onclick="createAdditionalDiv()" id='btn1' class="bg-blue w-10 h-10 grid place-content-center rounded  "><svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true" class="text-2xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"></path></svg></button> </div>
+            <button onclick="createAdditionalDiv()" id='btn1'
+                class="bg-blue w-10 h-10 grid place-content-center rounded  "><svg stroke="currentColor" fill="none"
+                    stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true" class="text-2xl" height="1em"
+                    width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"></path></svg></button>
+        </div>
     </div>
     <div id="mainContainer">
     </div>
