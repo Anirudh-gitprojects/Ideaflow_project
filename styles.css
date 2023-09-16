@@ -46,7 +46,7 @@ select {
 
 .mainBox {
   background-color: #212529;
-  width: 800px; /* Make the mainBox full-width on mobile */
+  width: 100%; /* Make the mainBox full-width on mobile */
   font-size: 20px;
   color: white;
   font-family: "Happy Monkey", cursive;
@@ -103,7 +103,7 @@ select {
   width: 500px;
 }
 /* Media query for smaller screens (e.g., mobile phones) */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .mainBox {
     font-size: 16px; /* Reduce font size on smaller screens */
   }
