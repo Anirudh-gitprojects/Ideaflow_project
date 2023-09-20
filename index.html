@@ -107,14 +107,15 @@
             }
         }
         function checkTrigger() {
-            if (event.key === ">" || event.touches) {
+            if (event.key === ">") {
                 let lastCharacters = getCharsBeforeCaret(this)
                 console.log(lastCharacters)
                 if (lastCharacters.toString() === "<>") {
-                    let mainBox = this.parentNode
+                    let mainBox = this.parentNode       
                     childNodes = this.parentNode.children
                     if (childNodes.length > 1) {
                         let selector = document.createElement('select')
+                        selector.id='selecttext'
                         selector.addEventListener('change', selection)
                         let topElement = document.createElement('option')
                         topElement.value = ""
@@ -133,11 +134,16 @@
                                 selector.appendChild(option)
                             }
                         }
+                   
                         this.appendChild(selector);
                     }
                 }
             }
+            if(event.key==="Escape"){
+                document.getElementById('selecttext').remove();
+            }
         }
+
 
         function createAdditionalDiv() {
             let innerBox = document.createElement('div')
