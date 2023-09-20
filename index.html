@@ -145,10 +145,10 @@
             innerBox.id = totalBoxes++;
             innerBox.className = "mainBox"
             let mainBox = document.getElementById('mainContainer')
-            innerBox.addEventListener('keypress', checkTrigger)
+            innerBox.addEventListener('keyup', checkTrigger)
             innerBox.addEventListener('touchstart', checkTrigger) // Added touchstart event
             mainBox.appendChild(innerBox);
-            $(".mainBox").on("keypress", function (event) {
+            $(".mainBox").on("keydown", function (event) {
                 if (event.key === 'Backspace' || event.key === 'Delete') {
                     let deletionMarker = document.createElement('span');
                     deletionMarker.hidden = true
