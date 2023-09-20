@@ -55,6 +55,7 @@ select {
   padding: 30px;
   border-top: none;
   border-right: none;
+  overflow-y:auto;
   border-left: none;
   border-bottom: 1px solid white;
   margin-bottom: 20px; /* Add some margin at the bottom on mobile */
