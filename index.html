@@ -107,7 +107,7 @@
             }
         }
         function checkTrigger() {
-            if (event.key === ">") {
+            if (event.key === ">" || event.touches) {
                 let lastCharacters = getCharsBeforeCaret(this)
                 console.log(lastCharacters)
                 if (lastCharacters.toString() === "<>") {
